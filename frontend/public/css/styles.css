@@ -79,6 +79,12 @@ body {
     background-color: #ff6675;
 }
 
+.login-logo {
+    width: 120px; /* Ajusta el tamaño según sea necesario */
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
 /* Mensajes de Autenticación */
 #auth-message {
     padding: 12px;
