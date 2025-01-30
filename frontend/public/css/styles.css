@@ -83,7 +83,8 @@ body {
 .login-logo {
     width: 300px; /* Ajusta el tamaño según sea necesario */
     display: block;
-    margin: 50px auto 20px auto; /* Ajusta los márgenes para centrar el logo */
+    margin: 50px auto 20px auto; /* Añade un espacio superior */
+    margin-top: 100px; /* Espacio añadido entre el logo y la parte superior de la página */
 }
 
 /* Mensajes de Autenticación */
