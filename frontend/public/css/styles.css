@@ -15,7 +15,7 @@ body {
 .login-container {
     background: rgba(255, 255, 255, 0.95);
     width: 90%;
-    max-width: 350px;
+    max-width: 500px; /* Aumenta el tamaño máximo */
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -82,7 +82,8 @@ body {
 
 /*logo KISSMAP*/
 .login-logo {
-    width: 480px; /* Ajusta el tamaño según sea necesario */
+    width: 100%; /* Ajusta el tamaño según sea necesario */
+    max-width: 480px; /* Asegura que no se salga del contenedor */
     display: block;
     margin: 0 auto 20px auto;
 }
