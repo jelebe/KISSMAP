@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jelebe/kissmap/issues"
   },
-  "homepage": "https://github.com/jelebe/kissmap#readme"
+  "homepage": "https://github.com/jelebe/kissmap#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
