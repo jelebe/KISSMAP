@@ -1,2 +1,2 @@
-# kissmap
-WEB/APP besos por el mundo
+# KISSMAP
+APP. Mejora Besos por el Mundo
