@@ -79,8 +79,10 @@ body {
     background-color: #ff6675;
 }
 
+
+/*logo KISSMAP*/
 .login-logo {
-    width: 120px; /* Ajusta el tamaño según sea necesario */
+    width: 360px; /* Ajusta el tamaño según sea necesario */
     display: block;
     margin: 0 auto 20px auto;
 }
