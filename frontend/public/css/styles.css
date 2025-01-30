@@ -5,7 +5,7 @@ body {
     padding: 0;
     min-height: 100vh;
     background: linear-gradient(rgba(255, 235, 238, 0.8), rgba(255, 235, 238, 0.8)),
-                url('frontend/public/images/fondo.jpg') center/cover fixed;
+            url('../images/fondo.jpg') center/cover fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,7 @@ body {
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
+    margin: 20px auto; /* Reduce la distancia para que haya más espacio para el logo */
 }
 
 .login-container h2 {
@@ -77,6 +77,14 @@ body {
 
 .login-container button:hover {
     background-color: #ff6675;
+}
+
+/*logo KISSMAP*/
+.login-logo {
+    width: 300px; /* Ajusta el tamaño según sea necesario */
+    display: block;
+    margin: 50px auto 20px auto; /* Añade un espacio superior */
+    margin-top: 100px; /* Espacio añadido entre el logo y la parte superior de la página */
 }
 
 /* Mensajes de Autenticación */
