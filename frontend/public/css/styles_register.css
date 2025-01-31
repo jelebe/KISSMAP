@@ -1,0 +1,66 @@
+.register-container {
+    background: rgba(255, 255, 255, 0.95);
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+#register-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.phone-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+}
+
+.phone-prefix select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ff99a3;
+    border-radius: 8px;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23ff577f" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    padding: 10px;
+    border: 2px solid #ff99a3;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+#profile-picture {
+    border: 2px dashed #ff99a3;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#profile-picture:hover {
+    background-color: #ffe5e8;
+}
+
+.auth-links {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.auth-links a {
+    color: #ff577f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}

@@ -124,3 +124,26 @@ body {
     }
 }
 
+
+.auth-links {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.auth-links a {
+    color: #ff577f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #c62828;
+    font-size: 0.8em;
+    margin-top: 4px;
+    display: block;
+    min-height: 16px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Besos por el Mundo | Registro</title>
+    <link rel="icon" href="../images/kissmap-logo_0.1.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles_register.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
+    <script src="../js/register.js" type="module"></script>
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <!-- iOS meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../images/icon-192x192.png">
+</head>
+<body>
+    <img src="../images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
+    <div class="register-container">
+        <h2>Crear Cuenta</h2>
+        <form id="register-form">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" required autocomplete="email">
+            <span id="email-error" class="error-message"></span>
+            
+            <label for="password">Contraseña (mínimo 6 caracteres)</label>
+            <input type="password" id="password" required minlength="6">
+            <span id="password-error" class="error-message"></span>
+            
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" required>
+            <span id="username-error" class="error-message"></span>
+            
+            <label for="fullname">Nombre Completo</label>
+            <input type="text" id="fullname" required>
+            <span id="fullname-error" class="error-message"></span>
+            
+            <label for="age">Edad</label>
+            <input type="number" id="age" min="13" max="120" required>
+            <span id="age-error" class="error-message"></span>
+            
+            <div class="phone-group">
+                <div class="phone-prefix">
+                    <label for="phone-prefix">Prefijo</label>
+                    <select id="phone-prefix" required>
+                        <option value="+34">+34</option>
+                        <option value="+1">+1</option>
+                        <option value="+44">+44</option>
+                    </select>
+                </div>
+                <div class="phone-number">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" pattern="[0-9]{9}" required>
+                </div>
+            </div>
+            <span id="phone-error" class="error-message"></span>
+            
+            <label for="description">Descripción del Perfil</label>
+            <textarea id="description" rows="3" maxlength="500"></textarea>
+            
+            <label for="profile-picture">Foto de Perfil</label>
+            <input type="file" id="profile-picture" accept="image/*">
+            
+            <button type="submit">Registrarse</button>
+        </form>
+        <div class="auth-links">
+            <p>¿Ya tienes cuenta? <a href="../index.html">Iniciar Sesión</a></p>
+        </div>
+        <div id="auth-message"></div>
+    </div>
+    <p class="version-text">Versión 0.0.1</p>
+</body>
+</html>

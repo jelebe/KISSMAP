@@ -18,5 +18,8 @@
   "homepage": "https://github.com/jelebe/kissmap#readme",
   "devDependencies": {
     "gh-pages": "^6.3.0"
+  },
+  "dependencies": {
+    "uuid": "^11.0.5"
   }
 }
