@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import firebaseConfig from './firebaseConfig.js';
 
@@ -53,4 +53,3 @@ loginForm.addEventListener('submit', function(event) {
             document.getElementById('auth-message').textContent = `Error: ${errorMessage}`;
         });
 });
-
