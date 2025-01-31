@@ -21,6 +21,20 @@
 <body>
     <img src="frontend/public/images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
     <div class="login-container">
+        <h2>Registrarse</h2>
+        <form id="register-form">
+            <label for="reg-email">Correo Electrónico</label>
+            <input type="email" id="reg-email" name="reg-email" required autocomplete="email">
+            <span id="reg-email-error" class="error-message"></span>
+            
+            <label for="reg-password">Contraseña</label>
+            <input type="password" id="reg-password" name="reg-password" required autocomplete="new-password">
+            <span id="reg-password-error" class="error-message"></span>
+            
+            <button type="submit" id="register-btn">Registrarse</button>
+        </form>
+    </div>
+    <div class="login-container">
         <h2>Iniciar Sesión</h2>
         <form id="login-form">
             <label for="email">Correo Electrónico</label>
