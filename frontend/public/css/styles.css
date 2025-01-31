@@ -79,6 +79,11 @@ body {
     background-color: #ff6675;
 }
 
+.error-message {
+    color: red;
+    display: none;
+}
+
 /*logo KISSMAP*/
 .login-logo {
     width: 300px; /* Ajusta el tamaño según sea necesario */
