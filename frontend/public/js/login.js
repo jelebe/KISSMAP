@@ -37,7 +37,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         .then((userCredential) => {
             const user = userCredential.user;
             console.log('Usuario autenticado:', user);
-            window.location.href = '/frontend/public/profile_page.html';
+            window.location.href = 'frontend/public/profile_page.html';
         })
         .catch((error) => {
             const errorMessage = error.message;
