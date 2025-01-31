@@ -14,52 +14,8 @@ const passwordInput = document.getElementById('password');
 const emailError = document.getElementById('email-error');
 const passwordError = document.getElementById('password-error');
 
-const registerForm = document.getElementById('register-form');
-const regEmailInput = document.getElementById('reg-email');
-const regPasswordInput = document.getElementById('reg-password');
-const regEmailError = document.getElementById('reg-email-error');
-const regPasswordError = document.getElementById('reg-password-error');
 
-// Función para manejar el registro
-registerForm.addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    let valid = true;
-
-    if (!regEmailInput.checkValidity()) {
-        regEmailError.textContent = 'Por favor, introduce un correo electrónico válido.';
-        regEmailError.style.display = 'block';
-        valid = false;
-    } else {
-        regEmailError.style.display = 'none';
-    }
-
-    if (!regPasswordInput.checkValidity()) {
-        regPasswordError.textContent = 'Por favor, introduce una contraseña válida.';
-        regPasswordError.style.display = 'block';
-        valid = false;
-    } else {
-        regPasswordError.style.display = 'none';
-    }
-
-    if (!valid) {
-        return;
-    }
-
-    const email = regEmailInput.value;
-    const password = regPasswordInput.value;
-
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log('Usuario registrado:', user);
-            document.getElementById('auth-message').textContent = 'Registro exitoso';
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            document.getElementById('auth-message').textContent = `Error: ${errorMessage}`;
-        });
-});
 
 // Función para manejar el inicio de sesión
 loginForm.addEventListener('submit', function(event) {
