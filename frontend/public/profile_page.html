@@ -33,5 +33,12 @@
     <!-- Scripts locales -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="js/map.js" type="module"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/frontend/public/js/sw.js')
+            .then(registration => console.log('SW registrado'))
+            .catch(error => console.log('Error registrando SW:', error));
+        }
+        </script>
 </body>
 </html>

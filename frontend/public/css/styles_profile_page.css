@@ -78,3 +78,14 @@ body {
         margin-top: 10px;
     }
 }
+
+@media (display-mode: standalone) {
+    .bottom-nav {
+      height: 80px; /* Más espacio para PWA instalada */
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    body {
+      background-color: #ffffff; /* Fondo sólido para PWA */
+    }
+  }
