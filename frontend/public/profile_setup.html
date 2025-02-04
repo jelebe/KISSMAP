@@ -1,41 +1,64 @@
-<!--Aquí el usuario completasu perfil.-->
+<!--Aquí el usuario completa su perfil.-->
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completa tu Perfil</title>
 
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles_profile_setup.css">
+
     <!-- Cargar CompressorJS como biblioteca tradicional -->
     <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.1/dist/compressor.min.js"></script>
 
-    <!-- Firebase SDKs (deben cargarse antes de profile_setup.js) -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js"></script>
 
-    <!-- Tu script principal -->
+    <!-- Script principal -->
     <script src="js/profile_setup.js" type="module"></script>
 </head>
 <body>
-    <form id="profile-form">
-        <label for="fullname">Nombre Completo</label>
-        <input type="text" id="fullname" required>
+    <!-- Contenedor principal -->
+    <div class="profile-setup-container">
+        <h2>Completa tu Perfil</h2>
+        <form id="profile-form">
+            <!-- Campo: Nombre Completo -->
+            <label for="fullname">Nombre Completo</label>
+            <input type="text" id="fullname" required>
+            <span id="fullname-error" class="error-message"></span>
 
-        <label for="birthdate">Fecha de Nacimiento</label>
-        <input type="date" id="birthdate" required>
+            <!-- Campo: Fecha de Nacimiento -->
+            <label for="birthdate">Fecha de Nacimiento</label>
+            <input type="date" id="birthdate" required>
+            <span id="birthdate-error" class="error-message"></span>
 
-        <label for="phone">Teléfono</label>
-        <input type="tel" id="phone" pattern="[0-9]{9}" required>
+            <!-- Campo: Teléfono -->
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" pattern="[0-9]{9}" required>
+            <span id="phone-error" class="error-message"></span>
 
-        <label for="description">Descripción del Perfil</label>
-        <textarea id="description" rows="3" maxlength="500"></textarea>
+            <!-- Campo: Descripción del Perfil -->
+            <label for="description">Descripción del Perfil</label>
+            <textarea id="description" rows="3" maxlength="500"></textarea>
+            <span id="description-error" class="error-message"></span>
 
-        <label for="profile-picture">Foto de Perfil</label>
-        <input type="file" id="profile-picture" accept="image/*" required>
+            <!-- Campo: Foto de Perfil -->
+            <label for="profile-picture">Foto de Perfil</label>
+            <input type="file" id="profile-picture" accept="image/*" required>
+            <span id="profile-picture-error" class="error-message"></span>
 
-        <button type="submit">Completar Perfil</button>
-    </form>
+            <!-- Botón de Envío -->
+            <button type="submit">Completar Perfil</button>
+        </form>
+
+        <!-- Enlaces adicionales -->
+        <div class="auth-links">
+            <p><a href="frontend/public/index.html">Volver al Registro</a></p>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,99 @@
+/* Contenedor principal */
+.profile-setup-container {
+    background: rgba(255, 255, 255, 0.95);
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+/* Formulario */
+#profile-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+textarea {
+    padding: 12px 15px;
+    border: 2px solid #ff99a3;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+    border-color: #ff577f;
+    outline: none;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+    background-color: #ff577f;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff4066;
+}
+
+/* Selector de archivo (imagen de perfil) */
+#profile-picture {
+    border: 2px dashed #ff99a3;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+#profile-picture:hover {
+    background-color: #ffe5e8;
+}
+
+#profile-picture::before {
+    content: "Seleccionar Foto de Perfil";
+    display: block;
+    color: #ff577f;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: #c62828;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Enlaces */
+.auth-links {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.auth-links a {
+    color: #ff577f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
