@@ -12,31 +12,37 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Elementos del DOM
-const authToggle = document.getElementById('auth-toggle');
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-const authMessage = document.getElementById('auth-message');
-
-// Toggle entre formularios
-authToggle.querySelectorAll('button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        authToggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
-        document.getElementById(`${e.target.dataset.form}-form`).classList.add('active');
-        authMessage.textContent = '';
-    });
-});
-
 // Manejar Login
-loginForm.addEventListener('submit', async (e) => {
+document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = loginForm.email.value;
-    const password = loginForm.password.value;
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const authMessage = document.getElementById('auth-message');
+
+    if (!email || !password) {
+        authMessage.textContent = 'Por favor, completa todos los campos.';
+        authMessage.style.color = '#c62828';
+        return;
+    }
+
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = 'frontend/public/profile_page.html';
+
+        // Verificar si el perfil está completo antes de redirigir
+        const user = auth.currentUser;
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            if (!userData.profileComplete) {
+                window.location.href = 'frontend/public/profile_setup.html';
+            } else {
+                window.location.href = 'frontend/public/profile_page.html';
+            }
+        } else {
+            console.error('No se encontraron datos de usuario.');
+            alert('Ocurrió un error al iniciar sesión.');
+        }
     } catch (error) {
         handleAuthError(error);
     }
@@ -44,6 +50,7 @@ loginForm.addEventListener('submit', async (e) => {
 
 // Manejo de errores
 function handleAuthError(error) {
+    const authMessage = document.getElementById('auth-message');
     authMessage.style.color = '#c62828';
     const errorMessages = {
         'auth/email-already-in-use': 'El email ya está registrado',

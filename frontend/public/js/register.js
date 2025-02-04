@@ -1,4 +1,3 @@
-//Este archivo manejará solo el registro básico (correo, contraseña y nombre de usuario) y redirigirá al usuario a profile_setup.html.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import {
     getAuth,
@@ -17,17 +16,38 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Validaciones adicionales
+function validateForm(email, password, username) {
+    let isValid = true;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showError('email-error', 'Email inválido');
+        isValid = false;
+    }
+
+    if (password.length < 6) {
+        showError('password-error', 'Mínimo 6 caracteres');
+        isValid = false;
+    }
+
+    if (username.length < 5) {
+        showError('username-error', 'Mínimo 5 caracteres');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const username = document.getElementById('username').value;
-
-    // Reset errores
     clearErrors();
 
-    // Validación básica
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const username = document.getElementById('username').value.trim();
+
     if (!validateForm(email, password, username)) return;
 
     try {
@@ -60,37 +80,18 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     }
 });
 
-function validateForm(email, password, username) {
-    let isValid = true;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-        showError('email-error', 'Email inválido');
-        isValid = false;
-    }
-    if (password.length < 6) {
-        showError('password-error', 'Mínimo 6 caracteres');
-        isValid = false;
-    }
-    if (username.length < 3) {
-        showError('username-error', 'Mínimo 3 caracteres');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
+// Manejo de errores
 function handleError(error) {
     const errorMap = {
         'auth/email-already-in-use': 'El email ya está registrado',
         'auth/username-in-use': 'El nombre de usuario ya existe',
         'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres'
     };
-
     const message = errorMap[error.code] || 'Error al registrar: ' + error.message;
     showError('auth-message', message);
 }
 
+// Funciones auxiliares
 function clearErrors() {
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
 }
