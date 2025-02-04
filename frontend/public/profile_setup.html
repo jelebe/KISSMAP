@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completa tu Perfil</title>
-    <!-- Importar CompressorJS como biblioteca tradicional -->
+
+    <!-- Cargar CompressorJS como biblioteca tradicional -->
     <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.1/dist/compressor.min.js"></script>
+
+    <!-- Firebase SDKs (deben cargarse antes de profile_setup.js) -->
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js"></script>
+
+    <!-- Tu script principal -->
     <script src="js/profile_setup.js" type="module"></script>
 </head>
 <body>
