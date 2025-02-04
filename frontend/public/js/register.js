@@ -3,10 +3,10 @@ import {
     getFirestore,
     doc,
     getDoc,
-    getDocs,
     collection,
     query,
-    where
+    where,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import firebaseConfig from './firebaseConfig.js';
 
@@ -41,9 +41,12 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
             throw { code: 'auth/username-in-use' };
         }
 
-        // Si todo está bien, redirigir a la página de configuración del perfil
-        window.location.href = 'frontend/public/profile_setup.html';
+        // Si todo está bien, almacenar datos en localStorage y redirigir
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        localStorage.setItem('username', username);
 
+        window.location.href = 'frontend/public/profile_setup.html';
     } catch (error) {
         handleError(error);
     }

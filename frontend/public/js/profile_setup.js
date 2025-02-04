@@ -1,4 +1,4 @@
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import {
     getFirestore,
     doc,
@@ -19,6 +19,18 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+// Mostrar email y username en la interfaz
+document.addEventListener('DOMContentLoaded', () => {
+    const displayEmailElement = document.getElementById('display-email');
+    const displayUsernameElement = document.getElementById('display-username');
+
+    const email = localStorage.getItem('email') || 'No disponible';
+    const username = localStorage.getItem('username') || 'No disponible';
+
+    displayEmailElement.textContent = email;
+    displayUsernameElement.textContent = username;
+});
+
 // Validaciones adicionales
 function validatePhone(phone) {
     const phoneRegex = /^[0-9]{9}$/;
@@ -32,12 +44,17 @@ function validateBirthdate(birthdate) {
 }
 
 // Función para comprimir y cargar imágenes
-function compressAndUploadImage(file) {
+function compressAndUploadImage(file, user) {
     return new Promise((resolve, reject) => {
+        if (!user) {
+            reject(new Error('El usuario no está autenticado.'));
+            return;
+        }
+
         new Compressor(file, {
             quality: 0.8,
             success(result) {
-                const storageRef = ref(storage, `profiles/${auth.currentUser.uid}/${result.name}`);
+                const storageRef = ref(storage, `profiles/${user.uid}/${result.name}`);
                 const uploadTask = uploadBytesResumable(storageRef, result);
 
                 uploadTask.on(
@@ -68,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         // Obtener valores del formulario
+        const email = localStorage.getItem('email');
+        const password = localStorage.getItem('password');
+        const username = localStorage.getItem('username');
+
         const fullname = document.getElementById('fullname')?.value?.trim() || '';
         const birthdate = document.getElementById('birthdate')?.value || '';
         const phone = document.getElementById('phone')?.value?.trim() || '';
@@ -93,26 +114,31 @@ document.addEventListener('DOMContentLoaded', () => {
         let profilePictureUrl = 'default.jpg';
 
         try {
-            if (profilePictureInput?.files[0]) {
-                profilePictureUrl = await compressAndUploadImage(profilePictureInput.files[0]);
-            }
+            // Crear usuario en Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-            // Crear usuario en Firebase Auth (usando datos del registro previo)
-            const user = auth.currentUser;
-            if (!user) {
-                console.error('El usuario no está autenticado.');
-                alert('Debes iniciar sesión para completar tu perfil.');
-                return;
+            // Subir la foto de perfil
+            if (profilePictureInput?.files[0]) {
+                profilePictureUrl = await compressAndUploadImage(profilePictureInput.files[0], user);
             }
 
             // Guardar datos completos en Firestore
             await setDoc(doc(db, 'users', user.uid), {
+                username,
+                email,
+                created_at: new Date(),
+                profileComplete: true,
                 fullname,
                 birthdate,
                 phone,
                 description,
-                profile_picture: profilePictureUrl,
-                profileComplete: true
+                profile_picture: profilePictureUrl
+            });
+
+            // Guardar el nombre de usuario en la colección 'usernames'
+            await setDoc(doc(db, 'usernames', username), {
+                uid: user.uid
             });
 
             // Redirigir a la página principal del perfil
