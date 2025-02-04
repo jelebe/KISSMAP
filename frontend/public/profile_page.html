@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    
+
     <!-- Hojas de estilo -->
     <link rel="stylesheet" href="css/styles_profile_page.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
-    <!-- esto es para PWA -->
+
+    <!-- Progressive Web App (PWA) -->
     <link rel="manifest" href="../manifest.json">
-    <!-- iOS meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="images/icon-192x192.png">
+
+    <!-- Script principal -->
+    <script src="js/profile_page.js" type="module"></script>
 </head>
 <body>
     <!-- Sección superior del perfil -->
     <div class="profile-header">
-        <!-- Ruta relativa desde public/ -->
-        <img src="images/usuario by Aldo Cervantes.png" alt="Foto de perfil" class="profile-image">
-        <h2>Nombre del Usuario</h2>
-        <p>Descripción del usuario</p>
-        <!-- ... resto del contenido ... -->
+        <img id="profile-image" src="images/default-avatar.png" alt="Foto de perfil" class="profile-image">
+        <h2 id="user-fullname">Nombre del Usuario</h2>
+        <p id="user-description">Descripción del usuario</p>
     </div>
 
     <!-- Sección del mapa -->
@@ -32,10 +36,10 @@
 
     <!-- Botonera inferior -->
     <div class="bottom-nav">
-        <div class="nav-button">Inicio</div>
-        <div class="nav-button">Mapa</div>
-        <div class="nav-button">Perfil</div>
-        <div class="nav-button">Configuración</div>
+        <div class="nav-button"><a href="frontend/public/index.html">Inicio</a></div>
+        <div class="nav-button"><a href="#map">Mapa</a></div>
+        <div class="nav-button"><a href="frontend/public/profile_page.html">Perfil</a></div>
+        <div class="nav-button"><a href="frontend/public/settings.html">Configuración</a></div>
     </div>
 
     <!-- Scripts locales -->
@@ -43,9 +47,9 @@
     <script src="js/map.js" type="module"></script>
     <script>
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/frontend/public/js/sw.js')
-            .then(registration => console.log('SW registrado'))
-            .catch(error => console.log('Error registrando SW:', error));
+            navigator.serviceWorker.register('/frontend/public/js/sw.js')
+                .then(registration => console.log('Service Worker registrado'))
+                .catch(error => console.error('Error registrando Service Worker:', error));
         }
     </script>
 </body>
