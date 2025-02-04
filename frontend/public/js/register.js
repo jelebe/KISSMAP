@@ -46,7 +46,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         localStorage.setItem('password', password);
         localStorage.setItem('username', username);
 
-        window.location.href = 'frontend/public/profile_setup.html';
+        window.location.href = 'kissmap/frontend/public/profile_setup.html';
     } catch (error) {
         handleError(error);
     }

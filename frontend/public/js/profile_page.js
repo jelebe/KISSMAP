@@ -21,7 +21,7 @@ async function loadUserProfile() {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
             alert('No se encontraron datos de perfil. Por favor, configúralo.');
-            window.location.href = 'frontend/public/profile_setup.html';
+            window.location.href = 'kissmap/frontend/public/profile_setup.html';
             return;
         }
 
@@ -67,6 +67,6 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // Redirigir al usuario a la página de inicio de sesión si no está autenticado
         alert('Debes iniciar sesión para acceder a esta página.');
-        window.location.href = 'frontend/public/login.html';
+        window.location.href = 'kissmap/frontend/public/login.html';
     }
 });

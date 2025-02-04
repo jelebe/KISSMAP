@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="images/icon-192x192.png">
 
     <!-- Script principal -->
-    <script src="js/profile_page.js" type="module"></script>
+    <script src="kissmap/frontend/public/js/profile_page.js" type="module"></script>
 </head>
 <body>
     <!-- Sección superior del perfil -->
@@ -36,18 +36,18 @@
 
     <!-- Botonera inferior -->
     <div class="bottom-nav">
-        <div class="nav-button"><a href="frontend/public/index.html">Inicio</a></div>
+        <div class="nav-button"><a href="kissmap/frontend/public/index.html">Inicio</a></div>
         <div class="nav-button"><a href="#map">Mapa</a></div>
-        <div class="nav-button"><a href="frontend/public/profile_page.html">Perfil</a></div>
-        <div class="nav-button"><a href="frontend/public/settings.html">Configuración</a></div>
+        <div class="nav-button"><a href="kissmap/frontend/public/profile_page.html">Perfil</a></div>
+        <div class="nav-button"><a href="kissmap/frontend/public/settings.html">Configuración</a></div>
     </div>
 
     <!-- Scripts locales -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="js/map.js" type="module"></script>
+    <script src="kissmap/frontend/public/js/map.js" type="module"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/frontend/public/js/sw.js')
+            navigator.serviceWorker.register('kissmap/frontend/public/js/sw.js')
                 .then(registration => console.log('Service Worker registrado'))
                 .catch(error => console.error('Error registrando Service Worker:', error));
         }

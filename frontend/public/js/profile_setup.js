@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Redirigir a la página principal del perfil
-            window.location.href = 'frontend/public/profile_page.html';
+            window.location.href = 'kissmap/frontend/public/profile_page.html';
         } catch (error) {
             console.error('Error al completar el perfil:', error);
             alert('Ocurrió un error al completar tu perfil.');
