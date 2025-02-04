@@ -36,10 +36,10 @@
 
     <!-- Botonera inferior -->
     <div class="bottom-nav">
-        <div class="nav-button"><a href="frontend/public/index.html">Inicio</a></div>
+        <div class="nav-button"><a href="index.html">Inicio</a></div>
         <div class="nav-button"><a href="#map">Mapa</a></div>
-        <div class="nav-button"><a href="frontend/public/profile_page.html">Perfil</a></div>
-        <div class="nav-button"><a href="frontend/public/settings.html">Configuración</a></div>
+        <div class="nav-button"><a href="profile_page.html">Perfil</a></div>
+        <div class="nav-button"><a href="settings.html">Configuración</a></div>
     </div>
 
     <!-- Scripts locales -->
@@ -47,7 +47,7 @@
     <script src="js/map.js" type="module"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/frontend/public/js/sw.js')
+            navigator.serviceWorker.register('./js/sw.js')
                 .then(registration => console.log('Service Worker registrado'))
                 .catch(error => console.error('Error registrando Service Worker:', error));
         }
