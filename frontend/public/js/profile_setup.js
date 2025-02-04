@@ -65,14 +65,11 @@ function compressAndUploadImage(file) {
 document.getElementById('profile-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('email').value.trim(); // Email proporcionado en el registro
-    const password = document.getElementById('password').value.trim(); // Contraseña proporcionada en el registro
-    const username = document.getElementById('username').value.trim(); // Nombre de usuario proporcionado en el registro
-
-    const fullname = document.getElementById('fullname').value.trim();
-    const birthdate = document.getElementById('birthdate').value;
-    const phone = document.getElementById('phone').value.trim();
-    const description = document.getElementById('description').value.trim();
+    // Obtener valores del formulario
+    const fullname = document.getElementById('fullname')?.value?.trim() || '';
+    const birthdate = document.getElementById('birthdate')?.value || '';
+    const phone = document.getElementById('phone')?.value?.trim() || '';
+    const description = document.getElementById('description')?.value?.trim() || '';
     const profilePictureInput = document.getElementById('profile-picture');
 
     // Validación de campos
@@ -94,33 +91,30 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
     let profilePictureUrl = 'default.jpg';
 
     try {
-        if (profilePictureInput.files[0]) {
+        if (profilePictureInput?.files[0]) {
             profilePictureUrl = await compressAndUploadImage(profilePictureInput.files[0]);
         }
 
-        // Crear usuario en Firebase Auth
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // Crear usuario en Firebase Auth (usando datos del registro previo)
+        const user = auth.currentUser;
+        if (!user) {
+            console.error('El usuario no está autenticado.');
+            alert('Debes iniciar sesión para completar tu perfil.');
+            return;
+        }
 
-        // Guardar datos básicos en Firestore
-        await Promise.all([
-            setDoc(doc(db, 'users', userCredential.user.uid), {
-                username,
-                email,
-                created_at: new Date(),
-                profileComplete: true,
-                fullname,
-                birthdate,
-                phone,
-                description,
-                profile_picture: profilePictureUrl
-            }),
-            setDoc(doc(db, 'usernames', username), {
-                uid: userCredential.user.uid
-            })
-        ]);
+        // Guardar datos completos en Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+            fullname,
+            birthdate,
+            phone,
+            description,
+            profile_picture: profilePictureUrl,
+            profileComplete: true
+        });
 
         // Redirigir a la página principal del perfil
-        window.location.href = 'frontend/public/profile_page.html';
+        window.location.href = 'index.html';//'frontend/public/profile_page.html';
     } catch (error) {
         console.error('Error al completar el perfil:', error);
         alert('Ocurrió un error al completar tu perfil.');
