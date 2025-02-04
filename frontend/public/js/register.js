@@ -1,6 +1,8 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+// frontend/public/js/register.js
+
+// Importar Firebase desde firebaseConfig.js
+import { db } from '../js/firebaseConfig.js';
 import {
-    getFirestore,
     doc,
     getDoc,
     collection,
@@ -8,16 +10,10 @@ import {
     where,
     getDocs
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-import firebaseConfig from './firebaseConfig.js';
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
+// Manejar registro
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // Limpiar errores previos
     clearErrors();
 
     // Obtener valores del formulario
@@ -45,8 +41,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         localStorage.setItem('username', username);
-
-        window.location.href = 'kissmap/frontend/public/profile_setup.html';
+        window.location.href = 'profile_setup.html';
     } catch (error) {
         handleError(error);
     }
@@ -55,23 +50,19 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
 // Función para validar el formulario
 function validateForm(email, password, username) {
     let isValid = true;
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         showError('email-error', 'Email inválido');
         isValid = false;
     }
-
     if (password.length < 6) {
         showError('password-error', 'Mínimo 6 caracteres');
         isValid = false;
     }
-
     if (username.length < 3) {
         showError('username-error', 'Mínimo 3 caracteres');
         isValid = false;
     }
-
     return isValid;
 }
 
@@ -79,13 +70,12 @@ function validateForm(email, password, username) {
 async function fetchEmailQuery(email) {
     try {
         const usersCollectionRef = collection(db, 'users');
-        const q = query(usersCollectionRef, where("email", "==", email)); // Consulta filtrada
+        const q = query(usersCollectionRef, where("email", "==", email));
         const querySnapshot = await getDocs(q);
-
-        return { exists: !querySnapshot.empty }; // Si hay resultados, el correo existe
+        return { exists: !querySnapshot.empty };
     } catch (error) {
         console.error('Error al verificar el correo:', error);
-        return { exists: false }; // En caso de error, asumimos que no existe
+        return { exists: false };
     }
 }
 

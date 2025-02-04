@@ -1,20 +1,13 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithEmailAndPassword 
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-import firebaseConfig from './firebaseConfig.js';
+// frontend/public/js/login.js
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Importar Firebase desde firebaseConfig.js
+import { auth, db } from '../js/firebaseConfig.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
-// Manejar Login
+// Manejar inicio de sesión
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
     const authMessage = document.getElementById('auth-message');
@@ -35,7 +28,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
         if (userDoc.exists()) {
             const userData = userDoc.data();
-
             // Verificar si el perfil está completo
             if (userData.profileComplete) {
                 // Redirigir a profile_page.html si el perfil está completo

@@ -1,32 +1,27 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+// frontend/public/js/profile_setup.js
+
+// Importar Firebase desde firebaseConfig.js
+import { auth, db, storage } from '../js/firebaseConfig.js';
 import {
-    getFirestore,
+    createUserWithEmailAndPassword,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import {
     doc,
     setDoc
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import {
-    getStorage,
     ref,
     uploadBytesResumable,
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import firebaseConfig from './firebaseConfig.js';
-
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
 
 // Mostrar email y username en la interfaz
 document.addEventListener('DOMContentLoaded', () => {
     const displayEmailElement = document.getElementById('display-email');
     const displayUsernameElement = document.getElementById('display-username');
-
     const email = localStorage.getItem('email') || 'No disponible';
     const username = localStorage.getItem('username') || 'No disponible';
-
     displayEmailElement.textContent = email;
     displayUsernameElement.textContent = username;
 });
@@ -50,13 +45,11 @@ function compressAndUploadImage(file, user) {
             reject(new Error('El usuario no está autenticado.'));
             return;
         }
-
         new Compressor(file, {
             quality: 0.8,
             success(result) {
                 const storageRef = ref(storage, `profiles/${user.uid}/${result.name}`);
                 const uploadTask = uploadBytesResumable(storageRef, result);
-
                 uploadTask.on(
                     "state_changed",
                     (snapshot) => {
@@ -88,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = localStorage.getItem('email');
         const password = localStorage.getItem('password');
         const username = localStorage.getItem('username');
-
         const fullname = document.getElementById('fullname')?.value?.trim() || '';
         const birthdate = document.getElementById('birthdate')?.value || '';
         const phone = document.getElementById('phone')?.value?.trim() || '';
@@ -100,12 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('El nombre completo es obligatorio.');
             return;
         }
-
         if (!validateBirthdate(birthdate)) {
             alert('La fecha de nacimiento debe ser válida y no puede ser futura.');
             return;
         }
-
         if (!validatePhone(phone)) {
             alert('El teléfono debe tener exactamente 9 dígitos.');
             return;
@@ -142,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Redirigir a la página principal del perfil
-            window.location.href = 'kissmap/frontend/public/profile_page.html';
+            window.location.href = 'profile_page.html';
         } catch (error) {
             console.error('Error al completar el perfil:', error);
             alert('Ocurrió un error al completar tu perfil.');
