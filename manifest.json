@@ -1,7 +1,7 @@
 {
   "name": "KissMap. Besos por el Mundo",
   "short_name": "KissMap",
-  "start_url": "index.html", 
+  "start_url": "/index.html", 
   "display": "standalone",          
   "background_color": "#FFEBEE",   
   "theme_color": "#FF577F",        

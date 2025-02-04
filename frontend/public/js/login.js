@@ -34,10 +34,10 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             // Verificar si el perfil está completo
             if (userData.profileComplete) {
                 // Redirigir a profile_page.html si el perfil está completo
-                window.location.href = `${CONFIG.BASE_URL}/profile_page.html`;
+                window.location.href = `${CONFIG.PUBLIC_URL}/profile_page.html`;
             } else {
                 // Redirigir a profile_setup.html si el perfil no está completo
-                window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
+                window.location.href = `${CONFIG.PUBLIC_URL}/profile_setup.html`;
             }
         } else {
             console.error('No se encontraron datos de usuario.');

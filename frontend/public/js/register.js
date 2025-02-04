@@ -44,7 +44,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         localStorage.setItem('username', username);
-        window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
+        window.location.href = `${CONFIG.PUBLIC_URL}/profile_setup.html`;
     } catch (error) {
         handleError(error);
     }

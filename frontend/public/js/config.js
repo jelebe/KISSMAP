@@ -3,9 +3,11 @@
 // frontend/public/js/config.js
 
 // Define la ruta base del proyecto
-const BASE_URL = '/kissmap/frontend/public'; // Cambia esto según la estructura de tu proyecto
+const ROOT_URL = '/'; // Ruta raíz del proyecto
+const PUBLIC_URL = '/frontend/public'; // Ruta base de los recursos en frontend/public
 
 // Exporta la configuración
 export const CONFIG = {
-    BASE_URL,
+    ROOT_URL,
+    PUBLIC_URL,
 };

@@ -13,7 +13,7 @@ async function loadUserProfile() {
     const user = auth.currentUser;
     if (!user) {
         alert('Debes iniciar sesión para ver tu perfil.');
-        window.location.href = `${CONFIG.BASE_URL}/login.html`;
+        window.location.href = `${CONFIG.PUBLIC_URL}/login.html`;
         return;
     }
 
@@ -22,7 +22,7 @@ async function loadUserProfile() {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
             alert('No se encontraron datos de perfil. Por favor, configúralo.');
-            window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
+            window.location.href = `${CONFIG.PUBLIC_URL}/profile_setup.html`;
             return;
         }
 
@@ -66,6 +66,6 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // Redirigir al usuario a la página de inicio de sesión si no está autenticado
         alert('Debes iniciar sesión para acceder a esta página.');
-        window.location.href = `${CONFIG.BASE_URL}/login.html`;
+        window.location.href = `${CONFIG.PUBLIC_URL}/login.html`;
     }
 });
