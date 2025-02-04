@@ -1,2 +1,7 @@
+# Ignorar el archivo .env
+.env
 
-node_modules/.cache/gh-pages/https\!github.com\!jelebe\!kissmap.git/
+# Ignorar archivos generados automáticamente
+node_modules/
+
+
