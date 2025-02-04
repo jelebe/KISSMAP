@@ -1,3 +1,4 @@
+// Importa las funciones necesarias de Firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import {
     getFirestore,
@@ -10,9 +11,11 @@ import {
     uploadBytesResumable,
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"; // Importa initializeApp aquí
 import firebaseConfig from './firebaseConfig.js';
 
-const app = initializeApp(firebaseConfig);
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig); // Usa initializeApp correctamente
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
@@ -39,7 +42,7 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
         if (profilePictureInput.files[0]) {
             const file = profilePictureInput.files[0];
 
-            // Usar CompressorJS para optimizar la imagen
+            // Usar CompressorJS desde la variable global
             new Compressor(file, {
                 quality: 0.8, // Calidad de compresión (0-1)
                 success(result) {
