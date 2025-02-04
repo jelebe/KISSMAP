@@ -36,7 +36,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     const phone = document.getElementById('phone').value;
     const description = document.getElementById('description').value;
     const profilePictureInput = document.getElementById('profile-picture');
-    let profilePictureUrl = 'default.jpg'; // Valor por defecto si no se sube una imagen
+    let profilePictureUrl = 'frontend/public/images/usuario by  Aldo Cervantes.png'; // Valor por defecto si no se sube una imagen
 
     // Reset errores
     clearErrors();
