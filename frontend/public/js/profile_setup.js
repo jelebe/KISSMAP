@@ -1,9 +1,8 @@
-// Importa las funciones necesarias de Firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import {
     getFirestore,
     doc,
-    updateDoc
+    setDoc
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import {
     getStorage,
@@ -11,11 +10,11 @@ import {
     uploadBytesResumable,
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"; // Importa initializeApp aquí
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import firebaseConfig from './firebaseConfig.js';
 
-// Inicializa Firebase
-const app = initializeApp(firebaseConfig); // Usa initializeApp correctamente
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
@@ -66,13 +65,9 @@ function compressAndUploadImage(file) {
 document.getElementById('profile-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const user = auth.currentUser;
-    if (!user) {
-        console.error('El usuario no está autenticado.');
-        alert('Debes iniciar sesión para completar tu perfil.');
-        window.location.href = 'frontend/public/login.html';
-        return;
-    }
+    const email = document.getElementById('email').value.trim(); // Email proporcionado en el registro
+    const password = document.getElementById('password').value.trim(); // Contraseña proporcionada en el registro
+    const username = document.getElementById('username').value.trim(); // Nombre de usuario proporcionado en el registro
 
     const fullname = document.getElementById('fullname').value.trim();
     const birthdate = document.getElementById('birthdate').value;
@@ -103,15 +98,26 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
             profilePictureUrl = await compressAndUploadImage(profilePictureInput.files[0]);
         }
 
-        // Actualizar los datos del usuario en Firestore
-        await updateDoc(doc(db, 'users', user.uid), {
-            fullname,
-            birthdate,
-            phone,
-            description,
-            profile_picture: profilePictureUrl,
-            profileComplete: true
-        });
+        // Crear usuario en Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Guardar datos básicos en Firestore
+        await Promise.all([
+            setDoc(doc(db, 'users', userCredential.user.uid), {
+                username,
+                email,
+                created_at: new Date(),
+                profileComplete: true,
+                fullname,
+                birthdate,
+                phone,
+                description,
+                profile_picture: profilePictureUrl
+            }),
+            setDoc(doc(db, 'usernames', username), {
+                uid: userCredential.user.uid
+            })
+        ]);
 
         // Redirigir a la página principal del perfil
         window.location.href = 'frontend/public/profile_page.html';
