@@ -11,7 +11,6 @@ import {
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
 import firebaseConfig from './firebaseConfig.js';
-import Compressor from 'compressorjs'; // Para optimizar imágenes
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -40,6 +39,7 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
         if (profilePictureInput.files[0]) {
             const file = profilePictureInput.files[0];
 
+            // Usar CompressorJS para optimizar la imagen
             new Compressor(file, {
                 quality: 0.8, // Calidad de compresión (0-1)
                 success(result) {
@@ -53,7 +53,8 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
                             console.log(`Carga de imagen: ${progress}%`);
                         },
                         (error) => {
-                            throw error;
+                            console.error('Error al cargar la imagen:', error);
+                            alert('Ocurrió un error al cargar tu foto de perfil.');
                         },
                         async () => {
                             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
@@ -71,6 +72,7 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
         // Esperar a que la imagen se cargue completamente
         await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulación de espera (opcional)
 
+        // Actualizar los datos del usuario en Firestore
         await updateDoc(doc(db, 'users', user.uid), {
             fullname,
             birthdate,
@@ -80,6 +82,7 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
             profileComplete: true
         });
 
+        // Redirigir a la página principal del perfil
         window.location.href = 'frontend/public/profile_page.html';
     } catch (error) {
         console.error('Error al completar el perfil:', error);
