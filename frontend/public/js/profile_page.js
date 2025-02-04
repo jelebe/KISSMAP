@@ -5,12 +5,15 @@ import { auth, db } from '../js/firebaseConfig.js';
 import { onAuthStateChanged, getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
+// Importar configuración
+import { CONFIG } from '../js/config.js';
+
 // Función para cargar los datos del usuario
 async function loadUserProfile() {
     const user = auth.currentUser;
     if (!user) {
         alert('Debes iniciar sesión para ver tu perfil.');
-        window.location.href = 'login.html';
+        window.location.href = `${CONFIG.BASE_URL}/login.html`;
         return;
     }
 
@@ -19,7 +22,7 @@ async function loadUserProfile() {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
             alert('No se encontraron datos de perfil. Por favor, configúralo.');
-            window.location.href = 'profile_setup.html';
+            window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
             return;
         }
 
@@ -63,6 +66,6 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // Redirigir al usuario a la página de inicio de sesión si no está autenticado
         alert('Debes iniciar sesión para acceder a esta página.');
-        window.location.href = 'login.html';
+        window.location.href = `${CONFIG.BASE_URL}/login.html`;
     }
 });

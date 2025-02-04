@@ -1,38 +1,34 @@
+<!-- frontend/public/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Besos por el Mundo | Registro</title>
-    <link rel="icon" href="frontend/public/images/kissmap-logo_0.1.png" type="image/png">
-    <link rel="stylesheet" href="frontend/public/css/styles.css">
+    <link rel="icon" href="images/kissmap-logo_0.1.png" type="image/png">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
-    <script src="frontend/public/js/register.js" type="module"></script>
+    <script src="js/config.js" type="module"></script>
+    <script src="js/register.js" type="module"></script>
 </head>
 <body>
-    <img src="frontend/public/images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
+    <img src="images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
     <div class="login-container">
         <h2>Registro</h2>
         <form id="register-form">
             <label for="email">Correo Electrónico</label>
             <input type="email" id="email" required>
             <span id="email-error" class="error-message"></span>
-
             <label for="password">Contraseña (mínimo 6 caracteres)</label>
             <input type="password" id="password" required>
             <span id="password-error" class="error-message"></span>
-
             <label for="username">Nombre de Usuario</label>
             <input type="text" id="username" required>
             <span id="username-error" class="error-message"></span>
-
             <button type="submit">Registrarse</button>
         </form>
         <div class="auth-links">
-            <p>¿Ya tienes cuenta? <a href="/kissmap/frontend/public/login.html">Inicia Sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="${CONFIG.BASE_URL}/login.html">Inicia Sesión</a></p>
         </div>
         <div id="auth-message"></div>
     </div>
