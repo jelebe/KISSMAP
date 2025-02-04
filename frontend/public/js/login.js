@@ -1,10 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { 
     getAuth, 
-    createUserWithEmailAndPassword, 
     signInWithEmailAndPassword 
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import firebaseConfig from './firebaseConfig.js';
 
 // Inicializar Firebase
@@ -27,17 +26,23 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     }
 
     try {
+        // Iniciar sesión con correo y contraseña
         await signInWithEmailAndPassword(auth, email, password);
 
-        // Verificar si el perfil está completo antes de redirigir
+        // Obtener los datos del usuario desde Firestore
         const user = auth.currentUser;
         const userDoc = await getDoc(doc(db, 'users', user.uid));
+
         if (userDoc.exists()) {
             const userData = userDoc.data();
-            if (!userData.profileComplete) {
-                window.location.href = 'frontend/public/profile_setup.html';
-            } else {
+
+            // Verificar si el perfil está completo
+            if (userData.profileComplete) {
+                // Redirigir a profile_page.html si el perfil está completo
                 window.location.href = 'frontend/public/profile_page.html';
+            } else {
+                // Redirigir a profile_setup.html si el perfil no está completo
+                window.location.href = 'frontend/public/profile_setup.html';
             }
         } else {
             console.error('No se encontraron datos de usuario.');
