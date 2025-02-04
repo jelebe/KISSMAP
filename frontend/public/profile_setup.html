@@ -1,17 +1,33 @@
+<!--Aquí el usuario completasu perfil.-->
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Cabecera similar a las otras páginas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completa tu Perfil</title>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js"></script>
     <script src="js/profile_setup.js" type="module"></script>
 </head>
 <body>
     <form id="profile-form">
+        <label for="fullname">Nombre Completo</label>
+        <input type="text" id="fullname" required>
+
+        <label for="birthdate">Fecha de Nacimiento</label>
         <input type="date" id="birthdate" required>
-        <input type="tel" id="phone" required>
-        <select id="phone-prefix">
-            <option value="+34">+34 (España)</option>
-            <!-- Más opciones -->
-        </select>
+
+        <label for="phone">Teléfono</label>
+        <input type="tel" id="phone" pattern="[0-9]{9}" required>
+
+        <label for="description">Descripción del Perfil</label>
+        <textarea id="description" rows="3" maxlength="500"></textarea>
+
+        <label for="profile-picture">Foto de Perfil</label>
+        <input type="file" id="profile-picture" accept="image/*" required>
+
         <button type="submit">Completar Perfil</button>
     </form>
 </body>
