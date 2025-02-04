@@ -16,6 +16,9 @@ import {
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
 
+// Importar configuración
+import { CONFIG } from '../js/config.js';
+
 // Mostrar email y username en la interfaz
 document.addEventListener('DOMContentLoaded', () => {
     const displayEmailElement = document.getElementById('display-email');
@@ -132,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Redirigir a la página principal del perfil
-            window.location.href = 'profile_page.html';
+            window.location.href = `${CONFIG.BASE_URL}/profile_page.html`;
         } catch (error) {
             console.error('Error al completar el perfil:', error);
             alert('Ocurrió un error al completar tu perfil.');

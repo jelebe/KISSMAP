@@ -11,6 +11,9 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
+// Importar configuración
+import { CONFIG } from '../js/config.js';
+
 // Manejar registro
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -41,7 +44,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         localStorage.setItem('username', username);
-        window.location.href = 'profile_setup.html';
+        window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
     } catch (error) {
         handleError(error);
     }

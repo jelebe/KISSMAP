@@ -5,6 +5,9 @@ import { auth, db } from '../js/firebaseConfig.js';
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
+// Importar configuración
+import { CONFIG } from '../js/config.js';
+
 // Manejar inicio de sesión
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -31,10 +34,10 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
             // Verificar si el perfil está completo
             if (userData.profileComplete) {
                 // Redirigir a profile_page.html si el perfil está completo
-                window.location.href = 'profile_page.html';
+                window.location.href = `${CONFIG.BASE_URL}/profile_page.html`;
             } else {
                 // Redirigir a profile_setup.html si el perfil no está completo
-                window.location.href = 'profile_setup.html';
+                window.location.href = `${CONFIG.BASE_URL}/profile_setup.html`;
             }
         } else {
             console.error('No se encontraron datos de usuario.');
