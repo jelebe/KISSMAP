@@ -27,7 +27,7 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
     if (!user) {
         console.error('El usuario no está autenticado.');
         alert('Debes iniciar sesión para completar tu perfil.');
-        window.location.href = '/login.html';
+        window.location.href = 'frontend/public/login.html';
         return;
     }
 
