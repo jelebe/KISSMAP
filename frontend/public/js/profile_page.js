@@ -28,7 +28,7 @@ async function loadUserProfile() {
         const userData = userDoc.data();
 
         // Mostrar los datos del usuario en la interfaz
-        document.getElementById('profile-image').src = userData.profile_picture || 'images/default-avatar.png';
+        document.getElementById('profile-image').src = userData.profile_picture || 'images/usuario by  Aldo Cervantes.png';
         document.getElementById('user-fullname').textContent = userData.fullname || 'Nombre no disponible';
         document.getElementById('user-description').textContent = userData.description || 'Sin descripción';
 
