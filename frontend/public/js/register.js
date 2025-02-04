@@ -2,7 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebas
 import {
     getFirestore,
     doc,
-    getDoc
+    getDoc,
+    getDocs,
+    collection
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import firebaseConfig from './firebaseConfig.js';
 
@@ -70,9 +72,13 @@ function validateForm(email, password, username) {
 
 // Función para verificar si un correo ya existe
 async function fetchEmailQuery(email) {
-    const usersCollection = await getDocs(collection(db, 'users'));
-    const emailExists = usersCollection.docs.find(doc => doc.data().email === email);
-    return emailExists ? { exists: true } : { exists: false };
+    const usersCollectionRef = collection(db, 'users'); // Referencia a la colección 'users'
+    const usersSnapshot = await getDocs(usersCollectionRef); // Obtener todos los documentos de la colección
+
+    // Buscar si algún documento tiene el email proporcionado
+    const emailExists = usersSnapshot.docs.some(doc => doc.data().email === email);
+
+    return { exists: emailExists };
 }
 
 // Manejo de errores
