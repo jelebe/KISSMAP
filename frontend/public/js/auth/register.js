@@ -1,20 +1,8 @@
-// frontend/public/js/register.js
+// frontend/public/js/auth/register.js
+import { db } from '../utils/firebaseConfig.js';
+import { doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { CONFIG } from '../config.js';
 
-// Importar Firebase desde firebaseConfig.js
-import { db } from '../js/firebaseConfig.js';
-import {
-    doc,
-    getDoc,
-    collection,
-    query,
-    where,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-
-// Importar configuración
-import { CONFIG } from '../js/config.js';
-
-// Manejar registro
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     clearErrors();
@@ -44,7 +32,10 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         localStorage.setItem('username', username);
-        window.location.href = `${CONFIG.PUBLIC_URL}/profile_setup.html`;
+
+        // Redirigir al usuario
+        window.location.href = `${CONFIG.ROOT_URL}profile_setup.html`;
+
     } catch (error) {
         handleError(error);
     }

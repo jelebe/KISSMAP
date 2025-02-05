@@ -1,19 +1,15 @@
-// frontend/public/js/profile_page.js
-
-// Importar Firebase desde firebaseConfig.js
-import { auth, db } from '../js/firebaseConfig.js';
+// frontend/public/js/profile/profile_page.js
+import { auth, db } from '../utils/firebaseConfig.js';
 import { onAuthStateChanged, getAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-
-// Importar configuración
-import { CONFIG } from '../js/config.js';
+import { CONFIG } from '../config.js';
 
 // Función para cargar los datos del usuario
 async function loadUserProfile() {
     const user = auth.currentUser;
     if (!user) {
         alert('Debes iniciar sesión para ver tu perfil.');
-        window.location.href = `${CONFIG.PUBLIC_URL}/login.html`;
+        window.location.href = `${CONFIG.ROOT_URL}login.html`;
         return;
     }
 
@@ -22,13 +18,14 @@ async function loadUserProfile() {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
             alert('No se encontraron datos de perfil. Por favor, configúralo.');
-            window.location.href = `${CONFIG.PUBLIC_URL}/profile_setup.html`;
+            window.location.href = `${CONFIG.ROOT_URL}profile_setup.html`;
             return;
         }
 
         const userData = userDoc.data();
+
         // Mostrar los datos del usuario en la interfaz
-        document.getElementById('profile-image').src = userData.profile_picture || 'images/usuario by Aldo Cervantes.png';
+        document.getElementById('profile-image').src = userData.profile_picture || `${CONFIG.PUBLIC_URL}images/default-avatar.png`;
         document.getElementById('user-fullname').textContent = userData.fullname || 'Nombre no disponible';
         document.getElementById('user-description').textContent = userData.description || 'Sin descripción';
 
@@ -66,6 +63,6 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // Redirigir al usuario a la página de inicio de sesión si no está autenticado
         alert('Debes iniciar sesión para acceder a esta página.');
-        window.location.href = `${CONFIG.PUBLIC_URL}/login.html`;
+        window.location.href = `${CONFIG.ROOT_URL}login.html`;
     }
 });

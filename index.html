@@ -1,18 +1,18 @@
-<!-- index.html (en la raíz del proyecto) -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Besos por el Mundo | Registro</title>
-    <link rel="icon" href="frontend/public/images/kissmap-logo_0.1.png" type="image/png">
-    <link rel="stylesheet" href="frontend/public/css/styles.css">
+    <link rel="icon" href="${CONFIG.PUBLIC_URL}images/kissmap-logo_0.1.png" type="image/png">
+    <link rel="stylesheet" href="${CONFIG.PUBLIC_URL}css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
-    <script src="frontend/public/js/config.js" type="module"></script>
-    <script src="frontend/public/js/register.js" type="module"></script>
+    <script src="${CONFIG.PUBLIC_URL}js/config.js" type="module"></script>
+    <script src="${CONFIG.PUBLIC_URL}js/auth/register.js" type="module"></script>
 </head>
 <body>
-    <img src="frontend/public/images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
+    <img src="${CONFIG.PUBLIC_URL}images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
     <div class="login-container">
         <h2>Registro</h2>
         <form id="register-form">
@@ -28,7 +28,7 @@
             <button type="submit">Registrarse</button>
         </form>
         <div class="auth-links">
-            <p>¿Ya tienes cuenta? <a href="${CONFIG.PUBLIC_URL}/login.html">Inicia Sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="${CONFIG.ROOT_URL}login.html">Inicia Sesión</a></p>
         </div>
         <div id="auth-message"></div>
     </div>

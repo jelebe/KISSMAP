@@ -1,48 +1,40 @@
-<!-- frontend/public/profile_page.html -->
+<!-- profile_page.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <!-- Hojas de estilo -->
-    <link rel="stylesheet" href="css/styles_profile_page.css">
+    <link rel="stylesheet" href="${CONFIG.PUBLIC_URL}css/styles_profile_page.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
-    <!-- Progressive Web App (PWA) -->
-    <link rel="manifest" href="../manifest.json">
+    <link rel="manifest" href="${CONFIG.PUBLIC_URL}../manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="images/icon-192x192.png">
-    <!-- Script principal -->
-    <script src="js/config.js" type="module"></script>
-    <script src="js/profile_page.js" type="module"></script>
+    <link rel="apple-touch-icon" href="${CONFIG.PUBLIC_URL}images/icon-192x192.png">
+    <script src="${CONFIG.PUBLIC_URL}js/config.js" type="module"></script>
+    <script src="${CONFIG.PUBLIC_URL}js/profile/profile_page.js" type="module"></script>
 </head>
 <body>
-    <!-- Sección superior del perfil -->
     <div class="profile-header">
-        <img id="profile-image" src="images/usuario by Aldo Cervantes.png" alt="Foto de perfil" class="profile-image">
+        <img id="profile-image" src="${CONFIG.PUBLIC_URL}images/usuario by Aldo Cervantes.png" alt="Foto de perfil" class="profile-image">
         <h2 id="user-fullname">Nombre del Usuario</h2>
         <p id="user-description">Descripción del usuario</p>
     </div>
-    <!-- Sección del mapa -->
     <div id="map" style="width: 100%; height: 400px;"></div>
-    <!-- Botonera inferior -->
     <div class="bottom-nav">
-        <div class="nav-button"><a href="/index.html">Inicio</a></div>
+        <div class="nav-button"><a href="${CONFIG.ROOT_URL}index.html">Inicio</a></div>
         <div class="nav-button"><a href="#map">Mapa</a></div>
-        <div class="nav-button"><a href="${CONFIG.PUBLIC_URL}/profile_page.html">Perfil</a></div>
-        <div class="nav-button"><a href="${CONFIG.PUBLIC_URL}/settings.html">Configuración</a></div>
+        <div class="nav-button"><a href="${CONFIG.ROOT_URL}profile_page.html">Perfil</a></div>
+        <div class="nav-button"><a href="${CONFIG.ROOT_URL}settings.html">Configuración</a></div>
     </div>
-    <!-- Scripts locales -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="js/map.js" type="module"></script>
+    <script src="${CONFIG.PUBLIC_URL}js/utils/map.js" type="module"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./js/sw.js')
+            navigator.serviceWorker.register('${CONFIG.PUBLIC_URL}js/sw.js')
                 .then(registration => console.log('Service Worker registrado'))
                 .catch(error => console.error('Error registrando Service Worker:', error));
         }

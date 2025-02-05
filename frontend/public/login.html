@@ -1,17 +1,17 @@
-<!-- frontend/public/login.html -->
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Besos por el Mundo | Inicio de Sesión</title>
-    <link rel="icon" href="../images/kissmap-logo_0.1.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/config.js" type="module"></script>
-    <script src="js/login.js" type="module"></script>
+    <link rel="icon" href="${CONFIG.PUBLIC_URL}../images/kissmap-logo_0.1.png" type="image/png">
+    <link rel="stylesheet" href="${CONFIG.PUBLIC_URL}css/styles.css">
+    <script src="${CONFIG.PUBLIC_URL}js/config.js" type="module"></script>
+    <script src="${CONFIG.PUBLIC_URL}js/auth/login.js" type="module"></script>
 </head>
 <body>
-    <img src="../images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
+    <img src="${CONFIG.PUBLIC_URL}../images/KISSMAP_BLANK.png" alt="KissMap Logo" class="login-logo">
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
         <form id="login-form">
@@ -24,7 +24,7 @@
             <button type="submit">Iniciar Sesión</button>
         </form>
         <div class="auth-links">
-            <p>¿No tienes cuenta? <a href="/index.html">Regístrate</a></p>
+            <p>¿No tienes cuenta? <a href="${CONFIG.ROOT_URL}index.html">Regístrate</a></p>
         </div>
         <div id="auth-message"></div>
     </div>
