@@ -1,8 +1,6 @@
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
-require('dotenv').config(); // Cargar variables de entorno
 
 // Leer la versión desde version.json
 const packageJson = JSON.parse(fs.readFileSync('./version.json', 'utf-8'));
@@ -46,5 +44,5 @@ module.exports = {
     static: './', // Sirve archivos desde la raíz del proyecto
     historyApiFallback: true // Soporte para rutas en aplicaciones SPA
   },
-  mode: 'development' // Cambia a 'production' cuando despliegues
+  mode: 'production' // Cambia a 'production' cuando despliegues
 };
